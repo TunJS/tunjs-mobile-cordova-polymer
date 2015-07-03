@@ -1,0 +1,8 @@
+node_modules/
+platforms/
+plugins/
+test/temp
+www/
+bower_components
+.tmp
+test/bower_components/
