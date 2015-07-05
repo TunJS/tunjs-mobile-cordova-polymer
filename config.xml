@@ -8,6 +8,7 @@
     TunJS
   </author>
   <content src="index.html" />
+  <!-- <content src="http://localhost/index.html" /> -->
   <preference name="xwalkVersion" value="13" />
   <plugin name="cordova-plugin-whitelist" version="1" />
   <access origin="*" />
