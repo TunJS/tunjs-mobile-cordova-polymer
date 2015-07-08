@@ -7,6 +7,10 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
+window.MEETUP_KEY = '5c4b1d264f3925541e45676d73106f1a';
+
+window.GOOGLE_PLUS_KEY = 'AIzaSyDIeycbdMumGfVW36NPu5r-DgmFQBPxGnM';
+
 (function (document) {
   'use strict';
 
@@ -14,10 +18,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // and give it some initial binding values
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
-
-  // app.displayInstalledToast = function () {
-  //   document.querySelector('#caching-complete').show();
-  // };
 
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
@@ -31,6 +31,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     if (drawerPanel && drawerPanel.narrow) {
       drawerPanel.closeDrawer();
     }
+  };
+
+  fetch.utils = {};
+
+  fetch.utils.parseJSON = function parseJSON(response) {
+    return response.json();
+  };
+
+  fetch.utils.checkStatus = function checkStatus(response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response;
+    } else {
+      var error = new Error(response.statusText);
+      error.response = response;
+      throw error;
+    }
+  };
+
+  fetch.utils.queryParams = function queryParams(params) {
+    return '?' + Object.keys(params).map(function (key) {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+    }).join('&');
   };
 
 })(document);

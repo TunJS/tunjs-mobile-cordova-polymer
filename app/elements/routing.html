@@ -1,45 +1,43 @@
-
 <script src="../../bower_components/page/page.js"></script>
 <script>
-  window.addEventListener('WebComponentsReady', function() {
+window.addEventListener('WebComponentsReady', function() {
 
-    var app = document.querySelector('#app');
+  var app = document.querySelector('#app');
 
-    page('/', function () {
-      app.route = 'home';
-    });
-
-    page('/members', function () {
-      app.route = 'members';
-    });
-
-    page('/members/:name', function (data) {
-      app.route = 'member-info';
-      app.params = data.params;
-    });
-
-    page('/jobs', function () {
-      app.route = 'jobs';
-    });
-
-    page('/jobs/:id', function (data) {
-      app.route = 'job-info';
-      app.params = data.params;
-    });
-
-    page('/contact', function () {
-      app.route = 'contact';
-    });
-
-    page('*', function () {
-      page.redirect('/');
-    });
-
-    // add #! before urls
-    page({
-      hashbang: true
-    });
-
+  page('/', function() {
+    app.route = 'home';
   });
 
+  page('/members', function() {
+    app.route = 'members';
+  });
+
+  page('/members/:name', function(data) {
+    app.route = 'member-info';
+    app.params = data.params;
+  });
+
+  page('/jobs', function() {
+    app.route = 'jobs';
+  });
+
+  page('/jobs/:id', function(data) {
+    app.route = 'job-info';
+    app.params = data.params;
+  });
+
+  page('/contact', function() {
+    app.route = 'contact';
+  });
+
+  page('*', function() {
+    page.redirect('/');
+  });
+
+  // add #! before urls
+  page({
+    hashbang: true
+  });
+
+});
 </script>
