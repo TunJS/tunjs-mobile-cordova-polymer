@@ -46,7 +46,7 @@ gulp.task('jshint', function () {
   return gulp.src([
       'app/scripts/**/*.js',
       'app/elements/**/*.js',
-      'app/elements/**/*.html'
+      // 'app/elements/**/*.html'
     ])
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint.extract()) // Extract JS from .html files
@@ -166,7 +166,9 @@ gulp.task('clean', del.bind(null, ['.tmp', 'www/*']));
 
 // Optimize Output Directory
 gulp.task('finalize', del.bind(null, [
-    'www/bower_components'
+    'www/bower_components/*',
+    '!www/bower_components/fetchp',
+    '!www/bower_components/page',
 ]));
 
 // Watch Files For Changes & Reload

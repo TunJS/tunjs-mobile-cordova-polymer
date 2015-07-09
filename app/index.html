@@ -8,6 +8,14 @@
   <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild-->
+  <script>
+  window.Polymer = window.Polymer || {};
+  window.Polymer.dom = 'shadow';
+  </script>
+
+  <!-- build:js bower_components/fetchp/fetchp.js -->
+  <script src="bower_components/fetchp/fetchp.js"></script>
+  <!-- endbuild -->
 
   <!-- will be replaced with elements/elements.vulcanized.html -->
   <link rel="import" href="elements/elements.html">
@@ -77,15 +85,11 @@
                 <h2>Google+ Community</h2>
                 <google-plus-activity key="GOOGLE_PLUS_KEY" i-community="107522288765560200646" community="Tunis JavaScript Meetup Group"></google-plus-activity>
               </paper-material>
-              <paper-material elevation="1">
+              <paper-material elevation="2">
                 <h2>Meetup Group</h2>
                 <meetup-activity key="MEETUP_KEY" group="7346152"></meetup-activity>
               </paper-material>
-              <paper-material elevation="1">
-                <h2>Meetup Group</h2>
-                <meetup-members key="MEETUP_KEY" group="7346152"></meetup-members>
-              </paper-material>
-              <paper-material elevation="1">
+              <paper-material elevation="2">
                 <my-greeting></my-greeting>
 
                 <p class="paper-font-subhead">You now have:</p>
@@ -100,15 +104,14 @@
             </section>
 
             <section data-route="members">
-              <paper-material elevation="1">
+              <paper-material elevation="2">
                 <h2 class="paper-font-display2">Members</h2>
-                <p>This is the members section</p>
-                <a href="#!/members/Rob">Rob</a>
               </paper-material>
+              <meetup-members key="MEETUP_KEY" group="7346152"></meetup-members>
             </section>
 
             <section data-route="member-info">
-              <paper-material elevation="1">
+              <paper-material elevation="2">
                 <h2 class="paper-font-display2">
                 Member:<span>{{params.name}}</span>
                 </h2>
@@ -117,7 +120,7 @@
             </section>
 
             <section data-route="jobs">
-              <paper-material elevation="1">
+              <paper-material elevation="2">
                 <h2 class="paper-font-display2">Jobs</h2>
                 <p>This is the jobs section</p>
                 <a href="#!/jobs/Job">Job</a>
@@ -125,7 +128,7 @@
             </section>
 
             <section data-route="job-info">
-              <paper-material elevation="1">
+              <paper-material elevation="2">
                 <h2 class="paper-font-display2">
                 Job:<span>{{params.name}}</span>
                 </h2>
@@ -134,7 +137,7 @@
             </section>
 
             <section data-route="contact">
-              <paper-material elevation="1">
+              <paper-material elevation="2">
                 <h2 class="paper-font-display2">Contact</h2>
                 <p>This is the contact section</p>
               </paper-material>
