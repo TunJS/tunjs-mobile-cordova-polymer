@@ -8,7 +8,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 'use strict';
-var historyApiFallback = require('connect-history-api-fallback');
 
 // Include Gulp & Tools We'll Use
 var gulp = require('gulp');
@@ -21,6 +20,8 @@ var merge = require('merge-stream');
 var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
+var historyApiFallback = require('connect-history-api-fallback');
+
 
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
@@ -239,7 +240,6 @@ gulp.task('default', ['clean'], function (cb) {
     'vulcanize',
     'finalize',
     cb);
-    // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
 });
 
 // Load tasks for web-component-tester
