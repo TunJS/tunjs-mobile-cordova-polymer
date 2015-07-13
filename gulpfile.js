@@ -8,6 +8,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 'use strict';
+var historyApiFallback = require('connect-history-api-fallback');
 
 // Include Gulp & Tools We'll Use
 var gulp = require('gulp');
@@ -119,6 +120,10 @@ gulp.task('html', function () {
     .pipe($.if('*.css', $.cssmin()))
     .pipe(assets.restore())
     .pipe($.useref())
+    // Inline source
+    .pipe($.inlineSource({
+      compress: false
+    }))
     // Minify Any HTML
     .pipe($.if('*.html', $.minifyHtml({
       quotes: true,
@@ -136,8 +141,7 @@ gulp.task('vulcanize', function () {
 
   return gulp.src('www/elements/elements.vulcanized.html')
     .pipe($.vulcanize({
-      dest: DEST_DIR,
-      strip: true,
+      stripComments: true,
       inlineCss: true,
       inlineScripts: true
     }))
@@ -175,6 +179,7 @@ gulp.task('finalize', del.bind(null, [
 gulp.task('serve', ['styles', 'elements', 'images'], function () {
   browserSync({
     notify: false,
+    logPrefix: 'PSK',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -189,6 +194,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
     // https: true,
     server: {
       baseDir: ['.tmp', 'app'],
+      middleware: [ historyApiFallback() ],
       routes: {
         '/bower_components': 'bower_components'
       }
@@ -206,6 +212,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
 gulp.task('serve:dist', ['default'], function () {
   browserSync({
     notify: false,
+    logPrefix: 'PSK',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -218,7 +225,8 @@ gulp.task('serve:dist', ['default'], function () {
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
-    server: 'www'
+    server: 'www',
+    middleware: [ historyApiFallback() ]
   });
 });
 
@@ -231,11 +239,12 @@ gulp.task('default', ['clean'], function (cb) {
     'vulcanize',
     'finalize',
     cb);
+    // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
 });
 
 // Load tasks for web-component-tester
 // Adds tasks for `gulp test:local` and `gulp test:remote`
-try { require('web-component-tester').gulp.init(gulp); } catch (err) {}
+require('web-component-tester').gulp.init(gulp);
 
 // Load custom tasks from the `tasks` directory
 try { require('require-dir')('tasks'); } catch (err) {}

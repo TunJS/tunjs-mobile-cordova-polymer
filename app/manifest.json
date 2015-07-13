@@ -1,0 +1,12 @@
+{
+	"name": "TunJS",
+  "short_name": "TunJS",
+  "start_url": "/#!/",
+  "display": "standalone"
+  "xwalk_hosts": [
+    "*//fonts.google.com/*",
+    "*//fonts.gstatic.com/*",
+    "*//www.googleapis.com/*",
+    "*//api.meetup.com/*"
+  ]
+}

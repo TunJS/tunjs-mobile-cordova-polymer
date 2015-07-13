@@ -482,33 +482,3 @@ body {
 .divider-color {
   border-color: #B6B6B6;
 }
-
-body > #fake {
-  display: none;
-}
-
-body[unresolved] > #fake {
-  display: block;
-}
-
-body[unresolved] > #fake fake-paper-header-panel {
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-body[unresolved] > #fake fake-paper-header-panel > fake-paper-toolbar {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 56px;
-  background: #E70013;
-  color: #FFFFFF;
-}
-
-body[unresolved] > #fake fake-paper-header-panel > .content {}

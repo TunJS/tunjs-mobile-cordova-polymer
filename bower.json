@@ -7,7 +7,8 @@
     "platinum-elements": "PolymerElements/platinum-elements#1.0.1",
     "neon-elements": "PolymerElements/neon-elements#1.0.0",
     "page": "visionmedia/page.js#~1.6.3",
-    "fetchp": "naderio/fetchp#~0.1.1"
+    "fetchp": "naderio/fetchp#~0.1.1",
+    "loadcss": "filamentgroup/loadCSS#~0.1.7"
   },
   "devDependencies": {
     "web-component-tester": "*",
