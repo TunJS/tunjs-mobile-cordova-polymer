@@ -22,12 +22,20 @@ var fs = require('fs');
 var glob = require('glob');
 var historyApiFallback = require('connect-history-api-fallback');
 
+var AUTOPREFIXER_BROWSERS = [
+  'chrome >= 40',
+  'android >= 4',
+  'ios_saf >= 7',
+  'ff >= 30',
+  'ie_mob >= 10',
+];
 
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
       return path.join('app', stylesPath, src);
     }))
     .pipe($.changed(stylesPath, {extension: '.css'}))
+    .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/' + stylesPath))
     .pipe($.if('*.css', $.cssmin()))
     .pipe(gulp.dest('www/' + stylesPath))
@@ -73,7 +81,6 @@ gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
     '!app/test',
-    '!app/precache.json'
   ], {
     dot: true
   }).pipe(gulp.dest('www'));
@@ -85,17 +92,11 @@ gulp.task('copy', function () {
   var elements = gulp.src(['app/elements/**/*.html'])
     .pipe(gulp.dest('www/elements'));
 
-  var swBootstrap = gulp.src(['bower_components/platinum-sw/bootstrap/*.js'])
-    .pipe(gulp.dest('www/elements/bootstrap'));
-
-  var swToolbox = gulp.src(['bower_components/sw-toolbox/*.js'])
-    .pipe(gulp.dest('www/sw-toolbox'));
-
   var vulcanized = gulp.src(['app/elements/elements.html'])
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('www/elements'));
 
-  return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox)
+  return merge(app, bower, elements, vulcanized)
     .pipe($.size({title: 'copy'}));
 });
 
@@ -150,28 +151,15 @@ gulp.task('vulcanize', function () {
     .pipe($.size({title: 'vulcanize'}));
 });
 
-// Generate a list of files that should be precached when serving from 'www'.
-// The list will be consumed by the <platinum-sw-cache> element.
-gulp.task('precache', function (callback) {
-  var dir = 'www';
-
-  glob('{elements,scripts,styles}/**/*.*', {cwd: dir}, function(error, files) {
-    if (error) {
-      callback(error);
-    } else {
-      files.push('index.html', './');
-      var filePath = path.join(dir, 'precache.json');
-      fs.writeFile(filePath, JSON.stringify(files), callback);
-    }
-  });
-});
-
 // Clean Output Directory
 gulp.task('clean', del.bind(null, ['.tmp', 'www/*']));
 
 // Optimize Output Directory
 gulp.task('finalize', del.bind(null, [
     'www/bower_components/*',
+    '!www/bower_components/webcomponentsjs',
+    '!www/bower_components/es6-promise',
+    '!www/bower_components/fetch',
     '!www/bower_components/fetchp',
     '!www/bower_components/page',
 ]));

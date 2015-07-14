@@ -6,13 +6,8 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title>TunJS</title>
 
-  <link rel="dns-prefetch" href="//fonts.google.com">
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel="dns-prefetch" href="//www.googleapis.com">
   <link rel="dns-prefetch" href="//api.meetup.com">
-
-  <link rel="prefetch" href="http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
-  <link rel="prefetch" href="http://fonts.googleapis.com/css?family=Inconsolata:400,700">
 
   <link inline inline-compress rel="stylesheet" href="styles/placeholder.css">
 
@@ -22,18 +17,16 @@
   <span id="browser-sync-binding"></span>
 
   <div id="placeholder">
-    <ph-paper-header-panel>
-      <ph-paper-toolbar id="mainToolbar">
-        <!-- <ph-paper-icon-button id="paperToggle" icon="menu"></ph-paper-icon-button>
-      <span class="flex"></span>
-      <ph-paper-icon-button icon="refresh"></ph-paper-icon-button>
-      <ph-paper-icon-button icon="search"></ph-paper-icon-button>
-      <div class="middle paper-font-display2 app-name">TunJS</div>
-      <div class="bottom title"></div> -->
-      </ph-paper-toolbar>
+    <div class="ph-paper-header-panel">
+      <div class="ph-paper-toolbar" id="mainToolbar">
+      </div>
       <div class="content"></div>
-    </ph-paper-header-panel>
+    </div>
   </div>
+
+  <!-- _build:css styles/fonts.css -->
+  <link inline inline-compress rel="stylesheet" href="styles/fonts.css">
+  <!-- _endbuild-->
 
   <!-- _build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
@@ -52,22 +45,22 @@
 
         <!-- Drawer Content -->
         <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]" on-iron-select="onMenuSelect">
-          <a data-route="home" href="#!/">
+          <a data-route="home" href="/">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
           </a>
 
-          <a data-route="members" href="#!/members">
+          <a data-route="members" href="/members">
             <iron-icon icon="info"></iron-icon>
             <span>Members</span>
           </a>
 
-          <a data-route="jobs" href="#!/jobs">
+          <a data-route="jobs" href="/jobs">
             <iron-icon icon="info"></iron-icon>
             <span>Jobs</span>
           </a>
 
-          <a data-route="contact" href="#!/contact">
+          <a data-route="contact" href="/contact">
             <iron-icon icon="mail"></iron-icon>
             <span>Contact</span>
           </a>
@@ -107,6 +100,7 @@
                   <h2>Meetup Group</h2>
                   <meetup-activity key="MEETUP_KEY" group="7346152"></meetup-activity>
                 </paper-material>
+              </template>
             </section>
 
             <section data-route="members">
@@ -133,7 +127,7 @@
               <paper-material elevation="2">
                 <h2 class="paper-font-display2">Jobs</h2>
                 <p>This is the jobs section</p>
-                <a href="#!/jobs/Job">Job</a>
+                <a href="/jobs/Job">Job</a>
                 <template is="dom-if" if="[[_is(route, 'jobs')]]" restamp="true">
                 </template>
               </paper-material>
@@ -161,6 +155,10 @@
     </paper-drawer-panel>
 
   </template>
+
+  <script inline src="scripts/webcomponents.js"></script>
+
+  <script inline src="scripts/polyfills.js"></script>
 
   <!-- will be replaced with elements/elements.vulcanized.html -->
   <link rel="import" href="elements/elements.html">
